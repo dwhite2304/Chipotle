@@ -1,0 +1,604 @@
+//Author: Danielle White
+//Date: 20220115
+//Purpose: Chipotle Order Project
+import java.util.Locale;
+import java.util.Scanner;
+public class Order extends Menu {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        Order order1 = new Order();
+        //order(in, order1);
+
+
+    }
+//PUT IN INPUT VALIDATION
+    public static String order(Scanner in, Order order1) {
+//for loop for how many things they want to order
+        System.out.println("Welcome to Chipotle, would you like a \n 1. burrito\n2. taco\n3. burrito bowl\n4. quesadilla\n5. salad");
+        String theOrder = in.nextLine().toLowerCase(Locale.ROOT);
+        if (theOrder.equals("burrito")) {
+            System.out.println("you've ordered a burrito");
+            order1.setOrderName("burrito");
+            System.out.println("Would you like to double wrap your burrito? y/n");
+            theOrder = in.nextLine().toLowerCase(Locale.ROOT);
+            if (theOrder.equals("y")){
+                order1.cost = order1.cost + .25;
+                order1.calories = order1.calories + 320;
+            }
+
+
+        } else if (theOrder.equals("taco")) { //tacos can get up to three, TORTILLA
+            System.out.println("you've ordered a taco");
+            order1.setOrderName("taco");
+            System.out.println("Would you like a soft flour tortilla or cripsy corn tortilla");
+            theOrder = in.nextLine().toLowerCase(Locale.ROOT);
+            if(theOrder.equals("soft flour tortilla")){
+                order1.calories = order1.calories + 80;
+
+            }else if(theOrder.equals("cripsy corn tortilla")){
+                order1.calories = order1.calories + 70;
+            }
+
+        } else if (theOrder.equals("burrito bowl")) {
+            System.out.println("you've ordered a burrito bowl");
+            order1.setOrderName("burrito bowl");
+
+        } else if (theOrder.equals("quesadilla")) { //no cheese option
+            System.out.println("you've ordered a quesadilla");
+            order1.setOrderName("quesadilla");
+
+
+        } else if (theOrder.equals("salad")) {
+            System.out.println("you've ordered a salad");
+            order1.setOrderName("salad");
+
+        }
+
+        ingredients(in, order1);
+
+        return "lol";
+    }
+
+
+    public static String ingredients(Scanner in, Order order1) {
+
+        //for loop to make sure its a string?
+        order1.getOrderName();
+
+        System.out.println("What would you like with your" + order1.getOrderName()); //+order
+        System.out.println("Pick a protein, your options are: \n 1. Barbacoa \n 2. Sofritas \n 3. Plant-Based Chorizo \n 4. Chicken \n 5. Steak \n 6. Carnitas");
+        //barbacoa, sofritas, plant-based chorizo, chicekn, steak, carnitas, veggie
+        if(!order1.getOrderName().equals("quesadilla")){
+            System.out.println("7. veggies");
+        }
+        if(order1.getOrderName().equals("quesadilla")){
+            System.out.println(" 7.Fajita veggies");
+            System.out.println(" 8. Cheese");
+
+        }
+        String protein = in.nextLine().toLowerCase(Locale.ROOT);
+            order1.setProtein(protein);
+
+
+        if(!order1.getProtein().equals("veggies") || !order1.getProtein().equals("cheese")) {
+            System.out.println("Would you like to double the meat in your order? y/n");
+            protein = in.nextLine().toLowerCase(Locale.ROOT);
+            if (protein.equals("y")) {
+                if(protein.equals("barbacoa")) {
+                    order1.cost = order1.cost + 4.45;
+                    order1.calories = order1.calories * 2;
+                }
+                if(protein.equals("plant-based chorizo")) {
+                    order1.cost = order1.cost + 4.10;
+                    order1.calories = order1.calories * 2;
+                }
+                if(protein.equals("steak")) {
+                    order1.cost = order1.cost + 4.45;
+                    order1.calories = order1.calories * 2;
+                }
+                if(protein.equals("chicken")) {
+                    order1.cost = order1.cost + 3.10;
+                    order1.calories = order1.calories * 2;
+                }
+                if(protein.equals("carnitas")) {
+                    order1.cost = order1.cost + 3.60;
+                    order1.calories = order1.calories * 2;
+                }
+                if(protein.equals("sofritas")) {
+                    order1.cost = order1.cost + 3.10;
+                    order1.calories = order1.calories * 2;
+                }
+
+
+            }
+        }
+
+        System.out.println("Would you like rice? please answer y/n");
+        //white rice, brown rice
+        String answer = in.nextLine();
+        if (answer.equals("y")) {
+            System.out.println("Pick a rice, your options are: \n 1. Brown rice \n 2. White rice");
+            String rice = in.nextLine().toLowerCase(Locale.ROOT);
+
+            if (rice.equals("white rice")) {
+                order1.setRice("white rice");
+
+            } else if (rice.equals("brown rice")) {
+                order1.setRice("brown rice");
+
+            }
+        }
+
+        System.out.println("Would you like beans? please answer y/n");
+        //black beans, pinto beans
+        answer = in.nextLine();
+        if (answer.equals("y")) {
+            System.out.println("Your beans options are: \n1. pinto beans \n2. black beans");
+            String beans = in.nextLine().toLowerCase(Locale.ROOT);
+            if (beans.equals("pinto beans")) {
+                order1.setBeans("pinto beans");
+
+
+            } else if (beans.equals("black beans")) {
+                order1.setBeans("black beans");
+
+            }
+
+        }
+SidesAndDrinks(in,order1);
+        return "lol";
+    }
+
+
+    public static void SidesAndDrinks(Scanner in, Order order1){
+        boolean sides[] = new boolean[14];
+        String side[] = {"chips", "chips and guacamole", "large chips and large guacamole", "side of guacamole","large side of guacamole","tortilla on the side", "chips and fresh tomato salsa","chips and tomatilo red chili salsa","chips and tomatillo green chili salsa","chips and roasted chili corn salsa","chips and queso blanco","large chips and large queso blanco","side of queso blanco","large side of queso blanco"};
+        boolean drinks[] = new boolean[16];
+        String drink[] = {"organic lemonade","organic hibiscus lemonade","organic mandarin agua fresca","organic berry agua fresca","fountain drink","mexican coca cola","mexican sprite","tractor organic black tea","tractor organic lemonade","san pellegrino sparkling","blackberry izze","grapefruit izze","bottled water","apple juice","peach orange juice","pinepple orange banana juice"};
+
+        System.out.println("Would you like toppings? please answer y/n");
+        String answer = in.nextLine().toLowerCase(Locale.ROOT);
+//yes and no?
+        boolean toppings[] = new boolean[11];//set to false
+        String topping[] = {"guacamole", "fresh tomato salsa","roasted chili corn salsa", "tomatillo red chili salsa", "sour cream", "fajitas","cheese","romaine lettuce","tomatilla green chili salsa", "queso blanco","Chipotle-Honey Vinaigrette"};
+
+
+        if (answer.equals("y")) {
+            System.out.println("Would you like");
+            if (!order1.getProtein().equals("veggies")) {
+                System.out.println("guacamole? y/n");
+                answer = in.nextLine().toLowerCase(Locale.ROOT);
+                if (answer.equals("y")) {
+                    toppings[0] = true;
+                }
+            }
+            System.out.println("fresh tomato salsa? y/n");
+            answer = in.nextLine().toLowerCase(Locale.ROOT);
+            if(answer.equals("y")){
+                toppings[1] = true;
+            }
+
+            System.out.println("roasted chili corn salsa? y/n");
+            answer = in.nextLine().toLowerCase(Locale.ROOT);
+            if(answer.equals("y")){
+                toppings[2] = true;
+            }
+            System.out.println("tomatillo red chili salsa? y/n");
+            answer = in.nextLine().toLowerCase(Locale.ROOT);
+            if(answer.equals("y")){
+                toppings[3] = true;
+            }
+            System.out.println("sour cream? y/n");
+            answer = in.nextLine().toLowerCase(Locale.ROOT);
+            if(answer.equals("y")){
+                toppings[4] = true;
+            }
+            System.out.println("fajitas? y/n");
+            answer = in.nextLine().toLowerCase(Locale.ROOT);
+            if(answer.equals("y")){
+                toppings[5] = true;
+            }
+            System.out.println("cheese? y/n");
+            answer = in.nextLine().toLowerCase(Locale.ROOT);
+            if(answer.equals("y")){
+                toppings[6] = true;
+            }
+            if(!order1.getOrderName().equals("salad")) {
+                System.out.println("romaine lettuce? y/n");
+                answer = in.nextLine().toLowerCase(Locale.ROOT);
+                if (answer.equals("y")) {
+                    toppings[7] = true;
+                }
+            }
+            System.out.println("tomatillo green chili salsa? y/n");
+            answer = in.nextLine().toLowerCase(Locale.ROOT);
+            if(answer.equals("y")){
+                toppings[8] = true;
+            }
+            System.out.println("queso blanco? y/n");
+            answer = in.nextLine().toLowerCase(Locale.ROOT);
+            if(answer.equals("y")){
+                toppings[9] = true;
+            }
+            if(order1.getOrderName().equals("salad")) {
+                System.out.println("Chipotle-Honey Vinaigrette? y/n");
+                answer = in.nextLine().toLowerCase(Locale.ROOT);
+                if (answer.equals("y")) {
+                    toppings[10] = true;
+                }
+            }
+
+
+        }
+        if (toppings[0] == true) {
+            if(!order1.getProtein().equals("veggies")) {
+                order1.calories = order1.calories + 230;
+                order1.cost = order1.cost + 2.55;
+            }else{
+                order1.calories = order1.calories + 230;
+            }
+        }
+        if(toppings[1] == true){
+            order1.calories = order1.calories + 25;
+
+        }
+        if(toppings[2] == true){
+            order1.calories = order1.calories + 80;
+
+        }
+        if(toppings[3] == true){
+            order1.calories = order1.calories + 30;
+
+        }
+        if(toppings[4] == true){
+            order1.calories = order1.calories + 110;
+
+        }
+        if(toppings[5] == true){
+            order1.calories = order1.calories + 20;
+
+        }
+        if(toppings[6] == true){
+            order1.calories = order1.calories + 110;
+
+        }
+        if(toppings[7] == true){
+            order1.calories = order1.calories + 5;
+
+        }
+        if(toppings[8] == true){
+            order1.calories = order1.calories + 15;
+
+        }
+        if(toppings[9] == true){
+            order1.calories = order1.calories + 120;
+            order1.cost = order1.cost + 1.60;
+
+        }
+        if(toppings[10] == true){
+            order1.calories = order1.calories + 220;
+
+        }
+
+        System.out.println("Would you like any sides? y/n");
+        String reply = in.nextLine().toLowerCase(Locale.ROOT);
+        if(reply.equals("y")){
+            System.out.println("Would you like ");
+            System.out.println("chips? y/n");
+             answer = in.nextLine().toLowerCase(Locale.ROOT);
+            if(answer.equals("y")){
+                sides[0] = true;
+            }
+            System.out.println("chips and guacamole? y/n");
+            answer = in.nextLine().toLowerCase(Locale.ROOT);
+            if(answer.equals("y")){
+                sides[0] = true;
+            }
+            System.out.println("large chips and large guacamole? y/n");
+            answer = in.nextLine().toLowerCase(Locale.ROOT);
+            if(answer.equals("y")){
+                sides[0] = true;
+            }
+            System.out.println("side of guacamole? y/n");
+            answer = in.nextLine().toLowerCase(Locale.ROOT);
+            if(answer.equals("y")){
+                sides[0] = true;
+            }
+            System.out.println("large side of guacamole? y/n");
+            answer = in.nextLine().toLowerCase(Locale.ROOT);
+            if(answer.equals("y")){
+                sides[0] = true;
+            }
+            System.out.println("tortilla on the side? y/n");
+            answer = in.nextLine().toLowerCase(Locale.ROOT);
+            if(answer.equals("y")){
+                sides[0] = true;
+            }
+            System.out.println("chips and fresh tomato salsa? y/n");
+            answer = in.nextLine().toLowerCase(Locale.ROOT);
+            if(answer.equals("y")){
+                sides[0] = true;
+            }
+            System.out.println("chips and tomatillo red chili salsa? y/n");
+            answer = in.nextLine().toLowerCase(Locale.ROOT);
+            if(answer.equals("y")){
+                sides[0] = true;
+            }
+            System.out.println("chips and tomatillo green chili salsa? y/n");
+            answer = in.nextLine().toLowerCase(Locale.ROOT);
+            if(answer.equals("y")){
+                sides[0] = true;
+            }
+            System.out.println("chips and roasted chili corn salsa? y/n");
+            answer = in.nextLine().toLowerCase(Locale.ROOT);
+            if(answer.equals("y")){
+                sides[0] = true;
+            }
+            System.out.println("chips and queso blanco? y/n");
+            answer = in.nextLine().toLowerCase(Locale.ROOT);
+            if(answer.equals("y")){
+                sides[0] = true;
+            }
+            System.out.println("large chips and large queso blanco? y/n");
+            answer = in.nextLine().toLowerCase(Locale.ROOT);
+            if(answer.equals("y")){
+                sides[0] = true;
+            }
+            System.out.println("side of queso blanco? y/n");
+            answer = in.nextLine().toLowerCase(Locale.ROOT);
+            if(answer.equals("y")){
+                sides[0] = true;
+            }
+            System.out.println("large side of queso blanco? y/n");
+            answer = in.nextLine().toLowerCase(Locale.ROOT);
+            if(answer.equals("y")){
+                sides[0] = true;
+            }
+
+        if(sides[1] == true){
+            order1.calories = order1.calories + 540;
+            order1.cost = order1.cost + 1.75;
+
+        }
+        if(sides[2] == true){
+            order1.calories = order1.calories + 1270;
+            order1.cost = order1.cost + 7.65;
+
+        }
+        if(sides[3] == true){
+            order1.calories = order1.calories + 230;
+            order1.cost = order1.cost + 2.55;
+
+        }
+        if(sides[4] == true){
+            order1.calories = order1.calories + 460;
+            order1.cost = order1.cost + 5.10;
+
+        }
+        if(sides[5] == true){
+            order1.calories = order1.calories + 320;
+            order1.cost = order1.cost + .25;
+
+        }
+        if(sides[6] == true){
+            order1.calories = order1.calories + 570;
+            order1.cost = order1.cost + 2.25;
+
+        }
+        if(sides[7] == true){
+            order1.calories = order1.calories + 570;
+            order1.cost = order1.cost + 2.25;
+
+        }
+        if(sides[8] == true){
+            order1.calories = order1.calories + 560;
+            order1.cost = order1.cost + 2.25;
+
+        }
+        if(sides[9] == true){
+            order1.calories = order1.calories + 620;
+            order1.cost = order1.cost + 2.25;
+
+        }
+        if(sides[10] == true){
+            order1.calories = order1.calories + 780;
+            order1.cost = order1.cost + 4.30;
+
+        }
+            if(sides[11] == true){
+                order1.calories = order1.calories + 1290;
+                order1.cost = order1.cost + 7.65;
+
+            }
+            if(sides[12] == true){
+                order1.calories = order1.calories + 240;
+                order1.cost = order1.cost + 2.55;
+
+            }
+            if(sides[13] == true){
+                order1.calories = order1.calories + 480;
+                order1.cost = order1.cost + 5.10;
+
+            }
+
+        }
+        System.out.println("Would you like any drinks? y/n");
+        reply = in.nextLine().toLowerCase(Locale.ROOT);
+        if(reply.equals("y")){
+            System.out.println("Would you like ");
+            System.out.println("organic lemonade? y/n");
+            answer = in.nextLine().toLowerCase(Locale.ROOT);
+            if(answer.equals("y")){
+                sides[0] = true;
+            }
+            System.out.println("organic hibiscus lemonade? y/n");
+            answer = in.nextLine().toLowerCase(Locale.ROOT);
+            if(answer.equals("y")){
+                sides[1] = true;
+            }
+            System.out.println("organic mandarin agua fresca? y/n");
+            answer = in.nextLine().toLowerCase(Locale.ROOT);
+            if(answer.equals("y")){
+                sides[2] = true;
+            }
+            System.out.println("organic berry agua fresca? y/n");
+            answer = in.nextLine().toLowerCase(Locale.ROOT);
+            if(answer.equals("y")){
+                sides[3] = true;
+            }
+            System.out.println("fountain drink? y/n");
+            answer = in.nextLine().toLowerCase(Locale.ROOT);
+            if(answer.equals("y")){
+                sides[4] = true;
+            }
+            System.out.println("mexican coca cola? y/n");
+            answer = in.nextLine().toLowerCase(Locale.ROOT);
+            if(answer.equals("y")){
+                sides[5] = true;
+            }
+            System.out.println("mexican sprite? y/n");
+            answer = in.nextLine().toLowerCase(Locale.ROOT);
+            if(answer.equals("y")){
+                sides[6] = true;
+            }
+            System.out.println("tractor organic black tea? y/n");
+            answer = in.nextLine().toLowerCase(Locale.ROOT);
+            if(answer.equals("y")){
+                sides[7] = true;
+            }
+            System.out.println("tractor organic lemondae? y/n");
+            answer = in.nextLine().toLowerCase(Locale.ROOT);
+            if(answer.equals("y")){
+                sides[8] = true;
+            }
+            System.out.println("san pellegrino sparkling? y/n");
+            answer = in.nextLine().toLowerCase(Locale.ROOT);
+            if(answer.equals("y")){
+                sides[9] = true;
+            }
+            System.out.println("blackberry izze? y/n");
+            answer = in.nextLine().toLowerCase(Locale.ROOT);
+            if(answer.equals("y")){
+                sides[10] = true;
+            }
+            System.out.println("grapefruit izze? y/n");
+            answer = in.nextLine().toLowerCase(Locale.ROOT);
+            if(answer.equals("y")){
+                sides[11] = true;
+            }
+            System.out.println("bottled water? y/n");
+            answer = in.nextLine().toLowerCase(Locale.ROOT);
+            if(answer.equals("y")){
+                sides[12] = true;
+            }
+            System.out.println("apple juice? y/n");
+            answer = in.nextLine().toLowerCase(Locale.ROOT);
+            if(answer.equals("y")){
+                sides[13] = true;
+            }
+            System.out.println("peach orange juice? y/n");
+            answer = in.nextLine().toLowerCase(Locale.ROOT);
+            if(answer.equals("y")){
+                sides[14] = true;
+            }
+            System.out.println("pineapple orange banana juice? y/n");
+            answer = in.nextLine().toLowerCase(Locale.ROOT);
+            if(answer.equals("y")){
+                sides[15] = true;
+            }
+            if(drinks[0] == true){
+                order1.calories = order1.calories + 150;
+                order1.cost = order1.cost + 2.70;
+            }
+            if(drinks[1] == true){
+                order1.calories = order1.calories + 150;
+                order1.cost = order1.cost + 2.70;
+            }
+            if(drinks[2] == true){
+                order1.calories = order1.calories + 150;
+                order1.cost = order1.cost + 2.70;
+            }
+            if(drinks[3] == true){
+                order1.calories = order1.calories + 150;
+                order1.cost = order1.cost + 2.70;
+            }
+            if(drinks[4] == true){
+                order1.calories = order1.calories + 270;
+                order1.cost = order1.cost + 2.70;
+            }
+            if(drinks[5] == true){
+                order1.calories = order1.calories + 160;
+                order1.cost = order1.cost + 3.00;
+            }
+            if(drinks[6] == true){
+                order1.calories = order1.calories + 160;
+                order1.cost = order1.cost + 3.00;
+            }
+            if(drinks[7] == true){
+                order1.calories = order1.calories + 140;
+                order1.cost = order1.cost + 3.20;
+            }
+            if(drinks[8] == true){
+                order1.calories = order1.calories + 140;
+                order1.cost = order1.cost + 3.20;
+            }
+            if(drinks[9] == true){
+                order1.cost = order1.cost + 2.85;
+            }
+            if(drinks[10] == true){
+                order1.calories = order1.calories + 170;
+                order1.cost = order1.cost + 3.25;
+            }
+            if(drinks[11] == true){
+                order1.calories = order1.calories + 160;
+                order1.cost = order1.cost + 3.25;
+            }
+            if(drinks[12] == true){
+                order1.cost = order1.cost + 2.60;
+            }
+            if(drinks[13] == true){
+                order1.calories = order1.calories + 240;
+                order1.cost = order1.cost + 3.20;
+            }
+            if(drinks[14] == true){
+                order1.calories = order1.calories + 220;
+                order1.cost = order1.cost + 3.20;
+            }
+            if(drinks[15] == true){
+                order1.calories = order1.calories + 280;
+                order1.cost = order1.cost + 3.20;
+            }
+
+        }
+     printOrder(in,order1,topping,toppings,side,sides,drink,drinks);
+
+    }
+
+
+public static void printOrder(Scanner in, Order order1, String[] topping, boolean[] t, String[]side, boolean[]s, String[] drink, boolean[]d){
+
+    System.out.println("You ordered a " + order1.getOrderName()+ " with "+ order1.getProtein() +" "+ order1.getBeans() +" "+ order1.getRice()); //print toppings array
+//toppings
+    for(int i=0; i<t.length; i++){
+        if(t[i] == true){
+            System.out.println(topping[i]);
+        }
+    }
+    //sides
+    for(int i=0; i<s.length; i++){
+        if(s[i] == true){
+            System.out.println(side[i]);
+        }
+    }
+    //drinks
+    for(int i=0; i<d.length; i++){
+        if(d[i] == true){
+            System.out.println(drink[i]);
+        }
+    }
+
+    System.out.printf("Your total is %.02f" + " and the amount of calories in your meal are " + order1.getCalories(),order1.getCost());
+}
+
+
+}
