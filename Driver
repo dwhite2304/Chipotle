@@ -1,0 +1,12 @@
+import java.util.Locale;
+//Author: Danielle White
+//Date: 20220115
+//Purpose: Chipotle Order Project
+import java.util.Scanner;
+public class Driverr {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        Order order1 = new Order(); //NAME BURRITO, nvm~
+        order1.order(in,order1);
+    }
+}
