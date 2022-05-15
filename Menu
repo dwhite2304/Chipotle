@@ -1,0 +1,123 @@
+//Author: Danielle White
+//Date: 20220115
+//Purpose: Chipotle Order Project
+import java.util.Locale;
+
+public class Menu{
+
+    String orderName;
+    String protein;
+        String rice;
+        String beans;
+        double cost;
+        int calories;
+
+        public void Menu(){ //default constructor
+        }
+
+    public void setOrderName(String orderName) {
+        this.orderName = orderName;
+
+    }
+
+        public String getOrderName(){
+            return this.orderName;
+
+        }
+        //setter methods
+        public void setProtein(String p){
+            this.protein = p;
+            if (p.equals("barbacoa")){
+                this.cost = 9.95; //or cost
+                calories = 170;
+            }else if(p.equals("sofritas")){
+                this.cost = 8.60; //or cost
+                calories = 150;
+            }else if (p.equals("plant-based chorizo")){
+                this.cost = 9.60; //or cost
+                calories = 220;
+            }else if(p.equals("chicken")){
+                this.cost = 8.60; //or cost
+                calories = 180;
+            }else if(p.equals("steak")){
+                this.cost = 9.95; //or cost
+                calories = 150;
+            }else if(p.equals("carnitas")){
+                this.cost = 9.10; //or cost
+                calories = 210;
+            }else if(p.equals("veggies")){
+                this.cost = 8.60;
+                calories = 20;
+            }
+            if(getOrderName().equals("quesadilla")){
+                if (this.protein.equals("barbacoa")) {
+                    this.cost = 10.50; //or cost
+                    this.calories = 170;
+                } else if (this.protein.equals("sofritas")) {
+                    this.cost = 9.15; //or cost
+                    this.calories = 150;
+                } else if (this.protein.equals("plant-based chorizo")) {
+                    this.cost = 10.15; //or cost
+                    this.calories = 220;
+                } else if (this.protein.equals("chicken")) {
+                    this.cost = 9.15; //or cost
+                    this.calories = 180;
+                } else if (this.protein.equals("steak")) {
+                    this.cost = 10.50; //or cost
+                    this.calories = 150;
+                } else if (this.protein.equals("carnitas")) {
+                    this.cost = 9.65; //or cost
+                    this.calories = 210;
+                } else if (this.protein.equals("fajita veggies")) {
+                    this.cost = 9.15;
+                    this.calories = 20;
+                } else if (this.protein.equals("cheese")) {
+                    this.cost = 9.15;
+                    this.calories = 110;
+
+                }
+            }
+
+        }
+
+        public void setRice(String r){
+            this.rice = r;
+            if(r.equals("white rice")){
+                calories = calories + 210;
+            }else if(r.equals("brown rice")){
+                calories = calories+210;
+            }
+        }
+
+        public void setBeans(String b){
+            this.beans = b;
+            if(b.equals("black beans")){
+                calories = calories+130;
+            }else if(b.equals("pinto beans")){
+                calories = calories+130;
+            }
+        }
+
+
+        //getter methods
+    public String getProtein(){
+            return this.protein;
+
+    }
+    public String getRice(){
+            return this.rice;
+
+    }
+    public String getBeans(){
+            return this.beans;
+    }
+    public double getCost(){
+        return this.cost;
+    }
+    public int getCalories(){
+            return this.calories;
+    }
+
+
+    }
+
